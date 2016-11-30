@@ -400,7 +400,7 @@ export default class SegmentLoader extends videojs.EventTarget {
 
       // if the video has not yet played only, and we already have
       // one segment downloaded do nothing
-      if (!hasPlayed && bufferedTime >= 1) {
+      if (!hasPlayed && bufferedTime >= Config.GOAL_BUFFER_LENGTH_BEFORE_PLAYING) {
         return null;
       }
 
