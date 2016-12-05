@@ -6,6 +6,7 @@ import SegmentLoader from './segment-loader';
 import Ranges from './ranges';
 import videojs from 'video.js';
 import AdCueTags from './ad-cue-tags';
+import Config from './config';
 
 // 5 minute blacklist
 const BLACKLIST_DURATION = 5 * 60 * 1000;
@@ -248,7 +249,7 @@ export class MasterPlaylistController extends videojs.EventTarget {
   setupMasterPlaylistLoaderListeners_() {
     this.masterPlaylistLoader_.on('loadedmetadata', () => {
       let media = this.masterPlaylistLoader_.media();
-      let requestTimeout = (this.masterPlaylistLoader_.targetDuration * 1.5) * 1000;
+      let requestTimeout = (this.masterPlaylistLoader_.targetDuration * Config.TIMEOUT_COEFFICIENT) * 1000;
 
       this.requestOptions_.timeout = requestTimeout;
 
@@ -317,7 +318,7 @@ export class MasterPlaylistController extends videojs.EventTarget {
 
     this.masterPlaylistLoader_.on('mediachange', () => {
       let media = this.masterPlaylistLoader_.media();
-      let requestTimeout = (this.masterPlaylistLoader_.targetDuration * 1.5) * 1000;
+      let requestTimeout = (this.masterPlaylistLoader_.targetDuration * Config.TIMEOUT_COEFFICIENT) * 1000;
       let activeAudioGroup;
       let activeTrack;
 
