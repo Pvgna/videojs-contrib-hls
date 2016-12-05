@@ -66,6 +66,20 @@ Object.defineProperty(Hls, 'GOAL_BUFFER_LENGTH_BEFORE_PLAYING', {
   }
 });
 
+Object.defineProperty(Hls, 'TIMEOUT_COEFFICIENT', {
+  get() {
+    return Config.TIMEOUT_COEFFICIENT;
+  },
+  set(v) {
+    if (typeof v !== 'number' || v <= 0) {
+      videojs.log.warn('value passed to Hls.TIMEOUT_COEFFICIENT ' +
+                       'must be a number and greater than 0');
+      return;
+    }
+    Config.TIMEOUT_COEFFICIENT = v;
+  }
+});
+
 // A fudge factor to apply to advertised playlist bitrates to account for
 // temporary flucations in client bandwidth
 const BANDWIDTH_VARIANCE = 1.2;
